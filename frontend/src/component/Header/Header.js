@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Form,
@@ -12,7 +13,9 @@ export const Header = () => {
   return (
     <Navbar bg="primary" expand="lg" varient="dark">
       <Container>
-        <Navbar.Brand href="#home">Note Store</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/">Note Store</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
@@ -26,7 +29,9 @@ export const Header = () => {
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link href="#home">My Notes</Nav.Link>
+            <Link to="/mynotes" className="nav-link">
+              My Notes
+            </Link>
             <NavDropdown title="Laya Gyanee" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
               <NavDropdown.Divider />
