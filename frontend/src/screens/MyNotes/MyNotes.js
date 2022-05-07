@@ -1,16 +1,27 @@
-import React from "react";
-import { Accordion, Badge, Button, Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Accordion, Badge, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MainScreen from "../../component/MainScreen";
-import notes from "../../notes";
 
 import "./MyNotes.css";
 
 const MyNotes = () => {
+  const [notes, setNotes] = useState([]);
+
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
     }
   };
+
+  const fetchNotes = async () => {
+    const { data } = await axios.get("api/notes");
+    setNotes(data);
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
 
   return (
     <MainScreen title="Welcome Back Laya...">
