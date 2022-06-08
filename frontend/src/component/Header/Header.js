@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Container,
   Form,
@@ -8,8 +8,18 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { logout } from "../../actions/userActions";
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <Navbar bg="primary" expand="lg" varient="dark">
       <Container>
@@ -35,7 +45,9 @@ export const Header = () => {
             <NavDropdown title="Laya Gyanee" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={logoutHandler}>
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

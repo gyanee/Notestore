@@ -3,7 +3,7 @@
   align-items: center;
   background-color: #efefef;
   padding: 0 5px;
-  border: 1px black solid;
+  border: 1px #ababab solid;
 }
 
 .acc-header {
@@ -16,6 +16,6 @@
   width: 100%;
   text-align: start;
   border: none;
-  outline: none;
+  outline: none !important;
   padding: 10px 0;
 }
