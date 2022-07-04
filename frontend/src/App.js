@@ -3,23 +3,27 @@ import { Footer } from "./component/Footer/Footer";
 import { Header } from "./component/Header/Header";
 import LandingPage from "./screens/LandingPage/LandingPage";
 import MyNotes from "./screens/MyNotes/MyNotes";
-
-import "./App.css";
-import "./bootstrap.min.css";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
-
+import CreateNote from "./screens/CreateNote/CreateNote";
+import SingleNote from "./screens/SingleNote/SingleNote";
+import "./App.css";
+import "./bootstrap.min.css";
+import { useState } from "react";
 
 function App() {
+  const [search, setSearch] = useState("");
   return (
     <BrowserRouter>
-      <Header />
+      <Header setSearch={setSearch} />
       <main>
         <Routes>
           <Route path="/" element={<LandingPage />} exact />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
-          <Route path="/mynotes" element={<MyNotes />} />
+          <Route path="/mynotes" element={<MyNotes search={search} />} />
+          <Route path="/createnote" element={<CreateNote />} />
+          <Route path="/note/:id" element={<SingleNote />} />
         </Routes>
       </main>
       <Footer />
