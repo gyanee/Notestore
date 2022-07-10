@@ -8,11 +8,13 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 
 export const Header = ({ setSearch }) => {
   const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const navigate = useNavigate();
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -39,18 +41,26 @@ export const Header = ({ setSearch }) => {
               />
             </Form>
           </Nav>
-          <Nav>
-            <Link to="/mynotes" className="nav-link">
-              My Notes
-            </Link>
-            <NavDropdown title="Laya Gyanee" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={logoutHandler}>
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
+          {userInfo ? (
+            <Nav>
+              <Link to="/mynotes" className="nav-link">
+                My Notes
+              </Link>
+              <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+                <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logoutHandler}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          ) : (
+            <Nav>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
